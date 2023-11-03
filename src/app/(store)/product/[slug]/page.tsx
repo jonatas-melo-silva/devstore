@@ -1,10 +1,11 @@
 import { api } from '@/data/api'
 import { Product } from '@/data/types/product'
+import { Metadata } from 'next'
 import Image from 'next/image'
 
 const ONE_HOUR = 60 * 60
 
-export type ProductPageProps = {
+export type ProductProps = {
   readonly params: {
     slug: string
   }
@@ -20,7 +21,16 @@ async function getProduct(slug: string): Promise<Product> {
   return product
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export async function generateMetadata({
+  params,
+}: ProductProps): Promise<Metadata> {
+  const product = await getProduct(params.slug)
+  return {
+    title: product.title,
+  }
+}
+
+export default async function Product({ params }: ProductProps) {
   const product = await getProduct(params.slug)
 
   return (
