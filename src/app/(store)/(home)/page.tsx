@@ -3,8 +3,14 @@ import { Product } from '@/data/types/product'
 import Image from 'next/image'
 import Link from 'next/link'
 
+const ONE_HOUR = 60 * 60
+
 async function getFeaturedProducts(): Promise<Product[]> {
-  const response = await api('/products/featured')
+  const response = await api('/products/featured', {
+    next: {
+      revalidate: ONE_HOUR,
+    },
+  })
   const products = await response.json()
   return products
 }
