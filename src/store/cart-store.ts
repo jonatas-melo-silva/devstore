@@ -1,19 +1,19 @@
 import { create } from 'zustand'
 
 type CartItem = {
-  productId: string
+  productId: number
   quantity: number
 }
 
 type CartState = {
   items: CartItem[] | []
-  addToCart: (productId: string) => void
+  addToCart: (productId: number) => void
 }
 
 export const useCartStore = create<CartState>((set, get) => {
   return {
     items: [],
-    addToCart: (productId: string) => {
+    addToCart: (productId: number) => {
       const items = get().items
 
       if (!items) {
