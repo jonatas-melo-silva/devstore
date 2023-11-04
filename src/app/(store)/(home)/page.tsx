@@ -24,6 +24,7 @@ export default async function Home() {
   const [highlightedProduct, ...otherProducts] = await getFeaturedProducts()
 
   return (
+    // eslint-disable-next-line prettier/prettier
     <div className="grid max-h-[860px] grid-cols-9 grid-rows-6 gap-6">
       <Link
         href={`/product/${highlightedProduct.slug}`}
